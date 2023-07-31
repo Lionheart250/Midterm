@@ -1,44 +1,36 @@
 <header>
-  <nav class="navbar navbar-expand-md navbar-dark bg-success">
-    <a class="navbar-brand" href="/urls">ebuy</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarNavAltMarkup"
-      aria-controls="navbarNavAltMarkup"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-          <a class="nav-item nav-link" href="/">My URLs</a>
+  <nav class="navbar navbar-expand-md header">
+      <section class="left-section">
+          <a class="navbar-brand" href="/urls">ebuy</a>
+          <a class="nav-item nav-link" href="/">Listings</a>
           <a class="nav-item nav-link" href="/">Sell</a>
-            <!-- Search Bar -->
-            <section class="search-section">
-              <div class="container">
-                <form class="form-inline my-2 my-lg-0">
-                  <input class="form-control mr-sm-2" type="search" placeholder="Search for clothing..." aria-label="Search">
-                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-              </div>
-            </section>
-            <!-- Login Logout -->
-            <!-- < if (logged in){> -->
-          <a class="nav-item nav-link" href="/">Favorites</a>
-          <div class="nav-item nav-link">Logged in as: email</div>
-          <form class="form-inline" action="/logout" method="POST">
-            <div class="form-group mb-2">
-              <button type="submit" class="btn btn-primary">Logout</button>
-            </div>
+      </section>
+      <!-- Search Bar -->
+      <section class="search-section">
+        <div class="container">
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search for clothing..." aria-label="Search">
+            <button class="search-button">
+              <img class="search-icon" src="images/icon/search.svg">
+              <div class="tooltip"> Search</div>
+          </button>
           </form>
-          <!-- < } else {> -->
-          <a class="nav-item nav-link" href="/register">Register</a>
-          <a class="nav-item nav-link" href="/login">Login</a>
-          <!-- < } > -->
-      </div>
-    </div>
+        </div>
+      </section>
+          <!-- Login Logout -->
+          <!-- < if (logged in){> -->
+      <section class="right-section">
+        <a class="nav-item nav-link" href="/">Favorites</a>
+        <div class="nav-item nav-link">Logged in as: email</div>
+        <form class="form-inline" action="/logout" method="POST">
+          <div class="form-group mb-2">
+            <button type="submit" class="btn btn-primary">Logout</button>
+          </div>
+        </form>
+        <!-- < } else {> -->
+        <a class="nav-item nav-link" href="/register">Register</a>
+        <a class="nav-item nav-link" href="/login">Login</a>
+        <!-- < } > -->
+      </section>
   </nav>
 </header>
