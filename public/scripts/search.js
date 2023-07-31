@@ -109,3 +109,52 @@ function displayFeaturedItems(featuredItems) {
 
 // Call the function to fetch and display featured items
 fetchFeaturedItems();
+
+// Admin Functionality
+
+// Function to post new items (Admin feature)
+function postItem(title, description, price, imageUrl) {
+  // Implement your logic to post new items to the server.
+  // You can use AJAX to send the item details to the server and handle the server-side logic there.
+
+  // For now, we'll just log a message to the console to simulate posting.
+  console.log('New item posted:', { title, description, price, imageUrl });
+}
+
+// Example usage: postItem('New Product', 'This is a new product.', 39.99, 'path/to/image.jpg');
+
+// Function to remove an item from the site (Admin feature)
+function removeItem(productId) {
+  // Implement your logic to remove the item from the server.
+  // You can use AJAX to send the productId to the server and handle the server-side logic there.
+
+  // For now, we'll just log a message to the console to simulate removal.
+  console.log('Item removed:', productId);
+}
+
+// Example usage: removeItem(123);
+
+// Function to mark an item as SOLD (Admin feature)
+function markAsSold(productId) {
+  // Implement your logic to mark the item as SOLD on the server.
+  // You can use AJAX to send the productId to the server and handle the server-side logic there.
+
+  // For now, we'll just log a message to the console to simulate marking as SOLD.
+  console.log('Item marked as SOLD:', productId);
+}
+
+// Example usage: markAsSold(456);
+
+// Function to send a negotiation message to the user (Admin feature)
+function sendNegotiationMessage(userId, message) {
+  // Implement your logic to send the negotiation message to the user.
+  // You can use AJAX to send the userId and message to the server and handle the server-side logic there.
+
+  // For now, we'll just log a message to the console to simulate sending the message.
+  console.log(`Negotiation message sent to user with userId ${userId}: ${message}`);
+}
+
+// Example usage: sendNegotiationMessage('user123', 'Your offer is accepted.');
+
+// You can call these admin functions based on admin actions or events.
+// For production use, you'll need to integrate these functions with your server-side code.
