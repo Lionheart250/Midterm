@@ -60,14 +60,14 @@ function fetchFeaturedItems() {
       title: 'Featured Product 1',
       description: 'This is a featured product with great features.',
       price: 49.99,
-      imageUrl: 'path/to/featured-image-1.jpg',
+      imageUrl: 'images/shirt.jpg',
     },
     {
       id: 2,
       title: 'Featured Product 2',
       description: 'Another featured product for you to explore.',
       price: 79.99,
-      imageUrl: 'path/to/featured-image-2.jpg',
+      imageUrl: 'images/jeans.jpg',
     },
     // Add more featured items as needed
   ];
