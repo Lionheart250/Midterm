@@ -1,24 +1,142 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <title>Home Page</title>
-
-  <meta charset="UTF-8" >
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
-
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
-  <link rel="stylesheet" href="/vendor/border-box.css" />
-  <link rel="stylesheet" href="/styles/main.css" />
-  <link rel="stylesheet" href="/styles/layout.css" />
-
-  <script src="/vendor/jquery-3.0.0.js"></script>
-  <script defer src="/scripts/app.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clothing Buy and Sell</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/listings.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/search.css" type="text/css" />
 </head>
-
 <body>
-  <h1>Have fun! 🥔</h1>
-</body>
+  <!-- Header -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container">
+        <a class="navbar-brand" href="#">Clothing Buy and Sell</a>
+        <!-- Add navigation links or buttons here -->
+      </div>
+    </nav>
+  </header>
 
+  <!-- Search Bar -->
+  <section class="search-section">
+    <div class="container">
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search for clothing..." aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Slider -->
+  <section class="slider-section">
+    <div class="container">
+      <!-- Add a carousel/slider here to showcase featured products -->
+      <h2>Featured Products</h2>
+      <div class="carousel">
+        <!-- Add carousel items here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Feed -->
+  <section class="main-feed-section">
+    <div class="container">
+      <h2>Available Listings</h2>
+      <div class="row" id="featuredItems">
+        <!-- Featured items will be dynamically added here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Price Filter -->
+  <section class="price-filter-section">
+    <div class="container">
+      <h2>Filter by Price</h2>
+      <form id="priceFilterForm">
+        <div class="form-row">
+          <div class="col-md-5">
+            <label for="minPrice">Min Price:</label>
+            <input type="number" id="minPrice" name="minPrice" class="form-control" placeholder="Min Price">
+          </div>
+          <div class="col-md-5">
+            <label for="maxPrice">Max Price:</label>
+            <input type="number" id="maxPrice" name="maxPrice" class="form-control" placeholder="Max Price">
+          </div>
+          <div class="col-md-2">
+            <button type="submit" class="btn btn-primary btn-block">Apply</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Product Listings -->
+  <section class="listings-section">
+    <div class="container">
+      <h2>Available Listings</h2>
+      <div class="row">
+        <!-- Add product listings here -->
+        <div class="col-md-4 product-item">
+          <div class="card">
+            <img class="card-img-top" src="path/to/product-image.jpg" alt="Product">
+            <div class="card-body">
+              <h5 class="card-title">Product Title</h5>
+              <p class="card-text">Product description goes here.</p>
+              <p class="price">$XX.XX</p>
+              <button class="btn btn-primary btn-sm favorite-btn" data-product-id="1">Favorite</button>
+              <form class="message-form">
+                <div class="form-group">
+                  <label for="message">Send Message:</label>
+                  <textarea class="form-control" id="message" name="message" rows="3" placeholder="Type your message here..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Send</button>
+              </form>
+              <!-- Add buttons for more details, buy, etc. -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2023 Clothing Buy and Sell. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="/scripts/app.js"></script>
+  <script type="text/javascript" src="/scripts/productListing.js"></script>
+  <script type="text/javascript" src="/scripts/favoritesEvents.js"></script>
+  <script type="text/javascript" src="/scripts/slider.js"></script>
+  <script type="text/javascript" src="/scripts/contactEvents.js"></script>
+  <script type="text/javascript" src="/scripts/createListing.js"></script>
+  <script type="text/javascript" src="/scripts/search.js"></script>
+  <script type="text/javascript" src="/scripts/myFavorites.js"></script>
+  <script type="text/javascript" src="/scripts/myListings.js"></script>
+  <script type="text/javascript" src="/scripts/logout.js"></script>
+  <script type="text/javascript" src="/scripts/sold.js"></script>
+  <script type="text/javascript" src="/scripts/deleteListing.js"></script>
+  <script type="text/javascript" src="/scripts/addToFavorites.js"></script>
+  <script type="text/javascript" src="/scripts/clothing.js"></script>
+  <script type="text/javascript" src="/scripts/contact.js"></script>
+  <script type="text/javascript" src="/scripts/delete.js"></script>
+  <script type="text/javascript" src="/scripts/login.js"></script>
+  <script type="text/javascript" src="/scripts/markSold.js"></script>
+  <script type="text/javascript" src="/scripts/newListings.js"></script>
+  <script type="text/javascript" src="/scripts/register.js"></script>
+  <script type="text/javascript" src="/scripts/removeFromFavorites.js"></script>
+  <script type="text/javascript" src="/scripts/users-api.js"></script>
+  <script type="text/javascript" src="/scripts/users.js"></script>
+  <script type="text/javascript" src="/scripts/widgets-api.js"></script>
+</body>
 </html>
