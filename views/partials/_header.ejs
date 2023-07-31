@@ -1,0 +1,34 @@
+<header>
+  <nav class="navbar navbar-expand-md header">
+      <section class="left-section">
+          <a class="navbar-brand" href="/urls">ebuy</a>
+          <a class="nav-item nav-link" href="/">Listings</a>
+          <a class="nav-item nav-link" href="/">Sell</a>
+      </section>
+      <!-- Search Bar -->
+      <section class="search-section">
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search for clothing..." aria-label="Search">
+            <button class="search-button">
+              <img class="search-icon" src="images/icon/search.svg">
+              <div class="tooltip"> Search</div>
+          </button>
+          </form>
+      </section>
+          <!-- Login Logout -->
+          <!-- < if (logged in){> -->
+      <section class="right-section">
+        <a class="nav-item nav-link" href="/">Favorites</a>
+        <div class="nav-item nav-link">Logged in as: email</div>
+        <form class="form-inline" action="/logout" method="POST">
+          <div class="form-group mb-2">
+            <button type="submit" class="btn btn-primary">Logout</button>
+          </div>
+        </form>
+        <!-- < } else {> -->
+        <a class="nav-item nav-link" href="/register">Register</a>
+        <a class="nav-item nav-link" href="/login">Login</a>
+        <!-- < } > -->
+      </section>
+  </nav>
+</header>

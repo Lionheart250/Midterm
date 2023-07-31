@@ -1,0 +1,52 @@
+.header{
+  height: 57px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: white;
+  border-bottom-width: 1px;
+  border-bottom-color: rgb(228, 228, 228);
+  border-bottom-style: solid;
+  color: black;
+}
+
+.ebuy-logo{
+  height: 20px;
+  cursor: pointer;
+}
+
+.left-section{
+  display: flex;
+  align-items: center;
+}
+
+.slider-section{
+  padding-top: 4.5em;
+}
+
+.middle-section{
+  flex: 1;
+  max-width: 500px;
+  margin-left: 70px;
+  margin-right: 35px;
+  align-items:  center;
+  display: flex;
+}
+
+.search-section{
+  flex: 1;
+  max-width: 500px;
+  margin-left: 70px;
+  margin-right: 35px;
+  align-items:  center;
+  display: flex;
+}
+
+.right-section{
+  display: flex;
+}
