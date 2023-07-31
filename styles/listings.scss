@@ -1,0 +1,21 @@
+/* listings.scss */
+
+/* Your listings-specific styles go here */
+/* For example, styling the product card */
+.product-item {
+  .card {
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+
+  .card-title {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .card-text {
+    font-size: 14px;
+  }
+
+  /* Additional product listings styles as needed */
+}
