@@ -1,0 +1,20 @@
+.price-filter-section{
+  position: fixed;
+  background-color: white;
+  top: 55px;
+  left: 0;
+  bottom: 0;
+  width: 80px;
+  z-index: 200;
+  padding-top: 5px;
+}
+
+.form-row{
+  height: 74px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+  width: 50px;
+}
