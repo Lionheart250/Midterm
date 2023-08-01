@@ -26,7 +26,7 @@ router.post('/', async (req, res) => {
     await addUser({ username, email, password: hashedPassword });
 
     // Redirect the user to the login page after successful registration
-    res.redirect('/login');
+    res.redirect('/');
   } catch (error) {
     console.error('Error during user registration:', error);
     res.render('register', { error: 'An error occurred during registration' });
