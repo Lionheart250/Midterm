@@ -81,13 +81,12 @@ app.use('/search', attachDbPool, searchRoute);
 
 app.get("/", (req, res) => {
   const templateVars = {
-    currentUser: undefined,
+    currentUser: req.session.user, // Update this line
     userEmail: undefined,
     error: undefined // Add the 'error' key with value 'undefined'
   }
-  if (req.session && req.session.user_id) {
-    templateVars.currentUser = req.session.user_id;
-    templateVars.userEmail = req.session.user_email;
+  if (req.session && req.session.user) {
+    templateVars.userEmail = req.session.user.email; // Update this line
   }
   res.render("index", templateVars);
 });
@@ -98,6 +97,18 @@ app.get("/login", (req, res) => {
     error: undefined // Pass the error as undefined to the login page
   }
   res.render("login", templateVars);
+});
+
+// Add this new route to handle the POST request to /logout
+app.post("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error('Error during logout:', err);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
+    res.clearCookie('connect.sid');
+    res.redirect('/'); // Redirect to the home page after logout
+  });
 });
 
 app.listen(PORT, () => {
