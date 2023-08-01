@@ -5,7 +5,7 @@ const { getUserWithEmail } = require('../lib/db');
 
 router.get('/', (req, res) => {
   // Render the login form
-  res.render('login');
+  res.render('login', {ifLoginPage: true });
 });
 
 router.post('/', async (req, res) => {
@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
 
     if (!user) {
       // User not found
-      return res.render('login', { error: 'Invalid credentials' });
+      return res.render('login', { error: 'Invalid credentials', ifLoginPage: true });
     }
 
     // Compare the provided password with the hashed password in the database
@@ -25,7 +25,7 @@ router.post('/', async (req, res) => {
 
     if (!passwordMatch) {
       // Invalid password
-      return res.render('login', { error: 'Invalid credentials' });
+      return res.render('login', { error: 'Invalid credentials', ifLoginPage: true });
     }
 
     // Store the user information in the session
@@ -35,7 +35,7 @@ router.post('/', async (req, res) => {
     res.redirect('/'); // Change '/' to the appropriate home page route
   } catch (error) {
     console.error('Error during user login:', error);
-    res.render('login', { error: 'An error occurred during login' });
+    res.render('login', { error: 'An error occurred during login', ifLoginPage: true });
   }
 });
 
