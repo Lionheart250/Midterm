@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
   const templateVars = {
     error: undefined // Add the 'error' key with value 'undefined'
   };
-  res.render('register', templateVars); // Render the registration form
+  return res.render('register', { error: 'Email already exists', ifRegistration: true }); // Render the registration form
 });
 
 router.post('/', async (req, res) => {
@@ -29,7 +29,7 @@ router.post('/', async (req, res) => {
     res.redirect('/');
   } catch (error) {
     console.error('Error during user registration:', error);
-    res.render('register', { error: 'An error occurred during registration' });
+    res.render('register', { error: 'An error occurred during registration', ifRegistration: true });
   }
 });
 

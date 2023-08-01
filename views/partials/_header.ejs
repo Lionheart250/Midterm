@@ -37,3 +37,21 @@
     <% } %>
   </nav>
 </header>
+
+<% if (isLoginPage) { %>
+  <style>
+    /* Add custom styles to override margin-left on login page */
+    .header {
+      margin-left: 0; /* Remove margin-left on login page */
+    }
+  </style>
+<% } %>
+
+<% if (isRegisterPage) { %>
+  <style>
+    /* Add custom styles to override margin-left on login page */
+    .header {
+      margin-left: 0; /* Remove margin-left on login page */
+    }
+  </style>
+<% } %>
