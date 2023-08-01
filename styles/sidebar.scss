@@ -1,20 +1,60 @@
 .price-filter-section{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   position: fixed;
   background-color: white;
-  top: 55px;
+  top: 0;
   left: 0;
   bottom: 0;
   width: 80px;
   z-index: 200;
-  padding-top: 5px;
 }
 
-.form-row{
-  height: 74px;
+#price-filter-title{
+  font-size: 16px;
+  font-weight: 600;
+}
+
+#priceFilterForm{
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 5em;
+  font-size: 10px;
+}
+
+#minPrice{
+  width: 5em;
+}
+
+#maxPrice{
+  margin-top: 0.3em;
+  width: 5em;
+}
+
+.price-range-button{
+  margin-top: 0.3em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
   cursor: pointer;
-  width: 50px;
+  height: 2em;
+  font-size: 10px;
+  border-radius: 2px;
+  border: 1px solid rgb(192, 192, 192);
+  transition: box-shadow 0.01s;
+}
+
+input:focus {
+  outline: none;
+}
+
+button:focus {
+  outline: none;
+  border: 1px solid black;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
 }
