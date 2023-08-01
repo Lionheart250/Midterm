@@ -1,15 +1,17 @@
 const express = require('express');
 const router = express.Router();
 
-// The route handler for /users
-router.get('/', (req, res) => {
-  // Access the dbPool from req object
-  const dbPool = req.dbPool;
-
-  // Now you can use the dbPool to execute queries, etc.
-  // ...
-
-  res.send('User route');
+// Log a user out
+router.post('/', (req, res) => {
+  // Assuming you are using express-session
+  req.session.destroy((err) => {
+    if (err) {
+      console.error('Error during logout:', err);
+      return res.status(500).json({ error: 'Internal server error' });
+    }
+    res.clearCookie('connect.sid');
+    res.redirect('/'); // Redirect to the home page after logout
+  });
 });
 
 module.exports = router;

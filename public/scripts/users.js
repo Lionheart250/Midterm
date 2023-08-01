@@ -1,17 +1,26 @@
 // Client facing scripts here
 $(() => {
-  $('#fetch-users').on('click', () => {
-    $.ajax({
-      method: 'GET',
-      url: '/api/users'
-    })
-    .done((response) => {
-      const $usersList = $('#users');
-      $usersList.empty();
+  $('#register-button').on('click', () => {
+    const formData = {
+      username: $('input[name="username"]').val(),
+      email: $('input[name="email"]').val(),
+      password: $('input[name="password"]').val(),
+    };
 
-      for(const user of response.users) {
-        $(`<li class="user">`).text(user.name).appendTo($usersList);
-      }
-    });
+    $.ajax({
+      method: 'POST',
+      url: '/register',
+      data: formData,
+    })
+      .done((response) => {
+        // Handle the response if needed
+        // For example, you can redirect the user to the login page on successful registration.
+        window.location.href = '/login';
+      })
+      .fail((error) => {
+        // Handle the error if needed
+        console.error('Error during user registration:', error);
+        // You can show an error message to the user, e.g., $("#error-message").text("An error occurred during registration");
+      });
   });
 });

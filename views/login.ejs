@@ -2,25 +2,60 @@
 <html lang="en">
 
 <head>
-  <title>Users</title>
-
-  <meta charset="UTF-8" >
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
-
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
-  <link rel="stylesheet" href="/vendor/border-box.css" />
-  <link rel="stylesheet" href="/styles/main.css" />
-  <link rel="stylesheet" href="/styles/layout.css" />
-
-  <script src="/vendor/jquery-3.0.0.js"></script>
-  <script defer src="/scripts/users.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
 </head>
 
 <body>
-  <h1>Users</h1>
-  <button id="fetch-users">Fetch Users via AJAX</button>
-  <ul id="users"></ul>
+  <h1>Login</h1>
+  <% if (locals.error) { %>
+    <p style="color: red;"><%= locals.error %></p>
+  <% } %>
+
+  <!-- The login form -->
+  <form method="post" action="/login">
+    <input type="text" name="email" placeholder="Email" />
+    <input type="password" name="password" placeholder="Password" />
+    <button type="submit">Login</button>
+  </form>
+
+  <!-- Your client-side JavaScript links here -->
+  <script src="/vendor/jquery-3.0.0.js"></script>
+  <script defer src="/scripts/users.js"></script>
+
+  <!-- Your inline client-side JavaScript here -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const loginForm = document.querySelector('form');
+      loginForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const formData = new FormData(loginForm);
+
+        fetch('/login', {
+          method: 'POST',
+          body: formData,
+          credentials: 'same-origin' // Include cookies in the request
+        })
+        .then((response) => {
+          if (response.ok) {
+            window.location.href = '/'; // Redirect to home page on successful login
+          } else {
+            return response.text();
+          }
+        })
+        .then((error) => {
+          // Display the error message returned by the server
+          const errorMessage = error || 'An error occurred during login';
+          document.getElementById('error-message').innerText = errorMessage;
+        })
+        .catch((error) => {
+          console.error('Error during login:', error);
+          document.getElementById('error-message').innerText = 'An error occurred during login';
+        });
+      });
+    });
+  </script>
 </body>
 
 </html>
