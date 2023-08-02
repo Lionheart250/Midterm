@@ -1,5 +1,4 @@
 .header{
-  margin-left: 5em;
   height: 57px;
   display: flex;
   flex-direction: row;
@@ -19,6 +18,11 @@
 .ebuy-logo{
   height: 20px;
   cursor: pointer;
+}
+
+.navbar-brand{
+  font-weight: bold;
+  font-size: 2em;
 }
 
 .left-section{

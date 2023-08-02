@@ -4,18 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registration Form</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/register.css" type="text/css" />
+
 </head>
 <body>
-  <h1>Registration Form</h1>
-  <% if (error) { %>
-    <p style="color: red;"><%= error %></p>
-  <% } %>
-  <!-- The registration form -->
-  <form method="post" action="/register">
-    <input type="text" name="username" placeholder="Username" />
-    <input type="text" name="email" placeholder="Email" />
-    <input type="password" name="password" placeholder="Password" />
-    <button type="submit">Register</button>
-  </form>
+  <!-- Header -->
+  
+    <% if (error) { %>
+      <p style="color: red;"><%= error %></p>
+      <% } %>
+      <!-- The registration form -->
+<form method="post" action="/register" class="registration-form">
+  <h1>Create an <span style="color: #007bff;">ebuy</span> Account</h1>  <input type="text" name="username" placeholder="Username" class="input-field" />
+  <input type="text" name="email" placeholder="Email" class="input-field" />
+  <input type="password" name="password" placeholder="Password" class="input-field" />
+  <button type="submit" class="register-button">Register</button>
+</form>
 </body>
 </html>
