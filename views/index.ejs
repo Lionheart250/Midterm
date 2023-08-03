@@ -8,9 +8,9 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
   <link rel="stylesheet" href="/styles/listings.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/search.css" type="text/css" />
   <link rel="stylesheet" href="/styles/header.css" type="text/css" />
   <link rel="stylesheet" href="/styles/sidebar.css" type="text/css" />
 </head>
@@ -68,7 +68,10 @@
               <h5 class="card-title">Product Title</h5>
               <p class="card-text">Product description goes here.</p>
               <p class="price">$XX.XX</p>
-              <button class="btn btn-primary btn-sm favorite-btn" data-product-id="1">Favorite</button>
+              <button class="favorite-button" data-product-id="1" onclick="toggleHeartIcon()">
+                <i id="heartIcon" class="fa-regular fa-heart" style="color: #ff0000;"></i>
+                Favorite
+              </button>
               <form class="message-form">
                 <div class="form-group">
                   <label for="message">Send Message:</label>
@@ -120,7 +123,22 @@
   <script type="text/javascript" src="/scripts/widgets-api.js"></script>
   <script type="text/javascript" src="/scripts/productListings.js"></script>
   <script type="text/javascript" src="/scripts/createListing.js"></script>
+  <script type="text/javascript">
+    function toggleHeartIcon() {
+      const heartIcon = document.getElementById('heartIcon');
+      const isSolid = heartIcon.classList.contains('fa-solid');
 
+      if (isSolid) {
+        // Change to regular heart icon
+        heartIcon.classList.remove('fa-solid');
+        heartIcon.classList.add('fa-regular');
+      } else {
+        // Change to solid heart icon
+        heartIcon.classList.remove('fa-regular');
+        heartIcon.classList.add('fa-solid');
+      }
+    }
+  </script>
 
   <!-- Logout script -->
 <script src="/scripts/logout.js"></script>

@@ -86,7 +86,10 @@ function handleCreateListingFormSubmit(event) {
               <h5 class="card-title">${response.title}</h5>
               <p class="card-text">${response.description}</p>
               <p class="price">$${response.price.toFixed(2)}</p>
-              <button class="btn btn-primary btn-sm favorite-btn" data-product-id="${response.id}">Favorite</button>
+              <button class="favorite-button" data-product-id="${response.id}" onclick="toggleHeartIcon()">
+              <i id="heartIcon" class="fa-regular fa-heart" style="color: #ff0000;"></i>
+              Favorite
+            </button>
               <form class="message-form">
                 <div class="form-group">
                   <label for="message">Send Message:</label>

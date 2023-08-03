@@ -18,7 +18,10 @@ function createProductListingElement(product) {
         <h5 class="card-title">${product.title}</h5>
         <p class="card-text">${product.description}</p>
         <p class="price">$${product.price.toFixed(2)}</p>
-        <button class="btn btn-primary btn-sm favorite-btn" data-product-id="${product.id}">Favorite</button>
+        <button class="favorite-button" data-product-id="${product.id}" onclick="toggleHeartIcon()">
+        <i id="heartIcon" class="fa-regular fa-heart" style="color: #ff0000;"></i>
+        Favorite
+      </button>
         <!-- Add more buttons or elements as needed -->
       </div>
     </div>

@@ -40,7 +40,7 @@ document.querySelectorAll('.message-form').forEach(form => {
   form.addEventListener('submit', function (event) {
     event.preventDefault();
 
-    const productId = this.closest('.product-item').querySelector('.favorite-btn').getAttribute('data-product-id');
+    const productId = this.closest('.product-item').querySelector('.favorite-button').getAttribute('data-product-id');
     const message = this.querySelector('#message').value;
 
     sendMessage(productId, message);
@@ -90,7 +90,10 @@ function displayFeaturedItems(featuredItems) {
           <h5 class="card-title">${item.title}</h5>
           <p class="card-text">${item.description}</p>
           <p class="price">$${item.price.toFixed(2)}</p>
-          <button class="btn btn-primary btn-sm favorite-btn" data-product-id="${item.id}">Favorite</button>
+          <button class="favorite-button" data-product-id="${item.id}" onclick="toggleHeartIcon()">
+          <i id="heartIcon" class="fa-regular fa-heart" style="color: #ff0000;"></i>
+          Favorite
+          </button>
           <form class="message-form">
             <div class="form-group">
               <label for="message">Send Message:</label>

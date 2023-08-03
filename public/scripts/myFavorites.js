@@ -18,7 +18,10 @@ function createFavoriteItemElement(item) {
         <h5 class="card-title">${item.title}</h5>
         <p class="card-text">${item.description}</p>
         <p class="price">$${item.price.toFixed(2)}</p>
-        <button class="btn btn-primary btn-sm favorite-btn" data-product-id="${item.id}">Favorite</button>
+        <button class="favorite-button" data-product-id="${item.id}" onclick="toggleHeartIcon()">
+        <i id="heartIcon" class="fa-regular fa-heart" style="color: #ff0000;"></i>
+        Favorite
+      </button>
       </div>
     </div>
   `;
