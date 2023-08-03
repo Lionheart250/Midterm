@@ -1,18 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Pool } = require('pg');
-
-const dbParams = {
-  user: 'labber',
-  password: 'labber',
-  host: 'localhost',
-  port: 5432,
-  database: 'midterm',
-  ssl: process.env.DB_SSL === 'true',
-};
-
-const dbPool = new Pool(dbParams);
-dbPool.connect();
+const { getAllListings } = require('../lib/db');
 
 // Middleware function to check if the user is logged in
 const requireAuth = (req, res, next) => {
@@ -23,26 +11,20 @@ const requireAuth = (req, res, next) => {
   next();
 };
 
-// Function to fetch user-specific listings from the database
-async function getUserListings(userId) {
-  const query = 'SELECT * FROM listings WHERE user_id = $1';
-  const result = await dbPool.query(query, [userId]);
-  return result.rows;
-}
-
-// The route handler for fetching user-specific listings
+// Route handler for /myListings
 router.get('/', requireAuth, async (req, res) => {
   try {
-    const userId = req.session.user.id;
+    // Fetch all listings from the database
+    const allListings = await getAllListings();
 
-    // Call the getUserListings function to fetch the user's listings from the database
-    const listings = await getUserListings(userId);
-
-    // Return the user's listings as the response
-    res.status(200).json(listings);
+    const templateVars = {
+      currentUser: req.session.user, // Assuming you are using the "user" session variable for authentication
+      listings: allListings, // Pass the fetched listings data to the template
+    };
+    res.render('allListings', templateVars); // Render the "allListings.ejs" template with the data
   } catch (error) {
-    console.error('Error fetching user listings:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    console.error('Error fetching listings:', error);
+    res.status(500).send('Internal Server Error');
   }
 });
 

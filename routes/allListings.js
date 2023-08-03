@@ -1,28 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const { Pool } = require('pg');
+const { getAllListings } = require('../lib/db');
 
-const dbParams = {
-  user: 'labber',
-  password: 'labber',
-  host: 'localhost',
-  port: 5432,
-  database: 'midterm',
-  ssl: process.env.DB_SSL === 'true',
+// Middleware function to check if the user is logged in
+const requireAuth = (req, res, next) => {
+  if (!req.session || !req.session.user) {
+    return res.status(401).json({ error: 'You must be logged in to perform this action.' });
+  }
+  // User is authenticated, proceed to the next middleware or route handler
+  next();
 };
 
-const dbPool = new Pool(dbParams);
-dbPool.connect();
-
-// Function to fetch all listings from the database
-async function getAllListings() {
-  const query = 'SELECT * FROM listings';
-  const result = await dbPool.query(query);
-  return result.rows;
-}
-
 // Route handler for /allListings
-router.get('/allListings', async (req, res) => {
+router.get('/', requireAuth, async (req, res) => {
   try {
     // Fetch all listings from the database
     const allListings = await getAllListings();
@@ -34,7 +24,7 @@ router.get('/allListings', async (req, res) => {
     res.render('allListings', templateVars); // Render the "allListings.ejs" template with the data
   } catch (error) {
     console.error('Error fetching listings:', error);
-    res.status(500).send('Internal Server Error');
+    res.status(500).render('error', { error: 'Internal Server Error' });
   }
 });
 
