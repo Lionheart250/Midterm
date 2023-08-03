@@ -55,6 +55,8 @@ const newListings = require('./routes/newListings');
 const registerRoute = require('./routes/register');
 const removeFavorite = require('./routes/removeFromFavorites');
 const searchRoute = require('./routes/search');
+const dashboardRoutes = require('./routes/dashboard'); // Import the dashboard.js route
+
 
 const attachDbPool = (req, res, next) => {
   req.dbPool = dbPool;
@@ -78,6 +80,8 @@ app.use('/newListings', attachDbPool, newListings);
 app.use('/register', attachDbPool, registerRoute);
 app.use('/removeFromFavorites', attachDbPool, removeFavorite);
 app.use('/search', attachDbPool, searchRoute);
+app.use('/dashboard', dashboardRoutes);
+
 
 app.get("/", (req, res) => {
   const templateVars = {

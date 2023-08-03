@@ -15,6 +15,29 @@
   <div class="dashboard-content">
     <h1>Welcome to Your Dashboard, <%= currentUser.username %>!</h1>
     <!-- Add other content specific to the dashboard -->
+
+    <!-- Listing Section -->
+    <section class="listing-section">
+      <h2>Your Listings</h2>
+      <div class="listings-container">
+        <% listings.forEach((listing) => { %>
+          <div class="listing">
+            <h3><%= listing.title %></h3>
+            <p><%= listing.description %></p>
+            <% if (typeof listing.price !== 'undefined') { %>
+              <p>Price: $<%= listing.price.toFixed(2) %></p>
+            <% } else { %>
+              <p>Price: N/A</p>
+            <% } %>
+            <img src="<%= listing.imageUrl %>" alt="Listing Image" style="max-width: 200px;">
+            <!-- Add a delete button for each listing -->
+            <button class="delete-btn" data-item-id="<%= listing.id %>">Delete</button>
+          </div>
+        <% }); %>
+      </div>
+    </section>
+
+    <!-- Create Listing Section -->
     <section class="create-listing-section">
       <h2>Create a New Listing</h2>
       <form id="createListingForm" class="create-listing-form">
