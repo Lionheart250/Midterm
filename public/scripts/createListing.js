@@ -1,6 +1,40 @@
+// Function to delete a listing
+function deleteListing(listingId) {
+  return fetch(`/api/deleteListing/${listingId}`, {
+    method: 'DELETE'
+  })
+  .then((response) => response.json())
+  .catch((error) => console.error('Error deleting listing:', error));
+}
+
+// Function to handle the "Delete" button click for a listing
+function handleDeleteItemClick(event) {
+  const itemId = event.target.dataset.itemId; // Assuming the listing ID is stored as a data attribute on the button
+  // Send a request to the server to delete the listing with the specified ID
+  deleteListing(itemId)
+    .then((data) => {
+      // Handle the response from the server (e.g., show success message, update the UI, etc.)
+      console.log('Listing deleted:', data.message);
+      // Optionally, you can remove the deleted listing from the UI immediately
+      // For example, you can remove the listing from the listings container by selecting its ID
+      // document.getElementById(itemId).remove();
+    })
+    .catch((error) => {
+      // Handle error (e.g., show error message)
+      console.error('Error deleting listing:', error);
+    });
+}
+
+// Event listener for delete button clicks
+document.addEventListener('click', (event) => {
+  if (event.target.classList.contains('delete-btn')) {
+    handleDeleteItemClick(event);
+  }
+});
+
 // Function to send a new listing to the server
 function createNewListing(listingData) {
-  return fetch('/api/newListings', {
+  return fetch('/newListings', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -42,6 +76,30 @@ function handleCreateListingFormSubmit(event) {
       document.getElementById('description').value = '';
       document.getElementById('price').value = '';
       document.getElementById('imageUrl').value = '';
+
+      // Add the newly created listing to the "Available Listings" section
+      const listingHtml = `
+        <div class="col-md-4 product-item">
+          <div class="card">
+            <img class="card-img-top" src="${response.imageUrl}" alt="Product">
+            <div class="card-body">
+              <h5 class="card-title">${response.title}</h5>
+              <p class="card-text">${response.description}</p>
+              <p class="price">$${response.price.toFixed(2)}</p>
+              <button class="btn btn-primary btn-sm favorite-btn" data-product-id="${response.id}">Favorite</button>
+              <form class="message-form">
+                <div class="form-group">
+                  <label for="message">Send Message:</label>
+                  <textarea class="form-control" id="message" name="message" rows="3" placeholder="Type your message here..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Send</button>
+              </form>
+              <!-- Add buttons for more details, buy, etc. -->
+            </div>
+          </div>
+        </div>
+      `;
+      document.getElementById('productListings').insertAdjacentHTML('beforeend', listingHtml);
     })
     .catch((error) => {
       // Handle error (e.g., show error message)
