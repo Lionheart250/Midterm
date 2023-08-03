@@ -57,7 +57,6 @@ const removeFavorite = require('./routes/removeFromFavorites');
 const searchRoute = require('./routes/search');
 const dashboardRoutes = require('./routes/dashboard'); // Import the dashboard.js route
 
-
 const attachDbPool = (req, res, next) => {
   req.dbPool = dbPool;
   next();
@@ -82,6 +81,8 @@ app.use('/removeFromFavorites', attachDbPool, removeFavorite);
 app.use('/search', attachDbPool, searchRoute);
 app.use('/dashboard', dashboardRoutes);
 
+// Import the deleteListing function from newListings.js
+const { deleteListing } = require('./routes/delete');
 
 app.get("/", (req, res) => {
   const templateVars = {
@@ -127,6 +128,21 @@ app.get("/dashboard", (req, res) => {
     currentUser: req.session.user,
   };
   res.render("dashboard", templateVars);
+});
+
+//delete listings
+// DELETE route to handle item deletion
+app.delete('/api/delete/:listingId', async (req, res) => {
+  try {
+    const listingId = req.params.listingId;
+    // Call the deleteListing function to delete the listing with the specified ID from the database
+    await deleteListing(listingId);
+    // Respond with a success message
+    res.json({ message: 'Listing deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting listing:', error);
+    res.status(500).json({ error: 'Error deleting listing' });
+  }
 });
 
 app.listen(PORT, () => {
