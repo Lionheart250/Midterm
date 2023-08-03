@@ -1,31 +1,27 @@
 <header>
   <nav class="navbar navbar-expand-md header">
     <section class="left-section">
-      <a class="navbar-brand" href="/urls">ebuy</a>
+      <a class="navbar-brand" href="/">ebuy</a>
       <a class="nav-item nav-link" href="/">Listings</a>
       <a class="nav-item nav-link" href="/">Sell</a>
     </section>
     <!-- Search Bar -->
     <section class="search-section">
-      <input class="search-input" type="search" placeholder="Search for clothing..." aria-label="Search">
-      <button class="search-button">
-        <img class="search-icon" src="/images/icon/search.svg">
-        <div class="tooltip">Search</div>
-      </button>
+      <!-- Search input and button code here -->
     </section>
     <!-- Login Logout -->
-    <% if (currentUser) { %>
-      <section class="right-section">
-        <a class="nav-item nav-link" href="/">Favorites</a>
-        <!-- Other navigation links -->
+    <section class="right-section">
+      <a class="nav-item nav-link" href="/">Favorites</a>
+      <% if (currentUser && currentUser.email === 'ebuyLHL@gmail.com') { %> <!-- Display the dashboard link only for the specific email -->
+        <a class="nav-item nav-link" href="/dashboard">Dashboard</a>
+      <% } %>
+      <% if (currentUser) { %> <!-- Display the logout form only if user is logged in -->
         <form class="form-inline" action="/logout" method="POST">
           <div class="form-group">
             <button type="submit" class="btn btn-primary">Logout</button>
           </div>
         </form>
-      </section>
-    <% } else { %>
-      <section class="right-section">
+      <% } else { %>
         <a class="nav-item nav-link" href="/register">Register</a>
         <!-- Login form -->
         <form action="/login" method="POST">
@@ -33,25 +29,25 @@
           <input type="password" name="password" placeholder="Password">
           <button type="submit">Login</button>
         </form>
-      </section>
-    <% } %>
+      <% } %>
+    </section>
   </nav>
+
+  <% if (typeof isLoginPage !== 'undefined' && isLoginPage) { %>
+    <style>
+      /* Add custom styles to override margin-left on login page */
+      .header {
+        margin-left: 0; /* Remove margin-left on login page */
+      }
+    </style>
+  <% } %>
+
+  <% if (typeof isRegisterPage !== 'undefined' && isRegisterPage) { %>
+    <style>
+      /* Add custom styles to override margin-left on register page */
+      .header {
+        margin-left: 0; /* Remove margin-left on register page */
+      }
+    </style>
+  <% } %>
 </header>
-
-<% if (isLoginPage) { %>
-  <style>
-    /* Add custom styles to override margin-left on login page */
-    .header {
-      margin-left: 0; /* Remove margin-left on login page */
-    }
-  </style>
-<% } %>
-
-<% if (isRegisterPage) { %>
-  <style>
-    /* Add custom styles to override margin-left on login page */
-    .header {
-      margin-left: 0; /* Remove margin-left on login page */
-    }
-  </style>
-<% } %>

@@ -7,8 +7,8 @@ function createNewListing(listingData) {
     },
     body: JSON.stringify(listingData),
   })
-  .then((response) => response.json())
-  .catch((error) => console.error('Error creating new listing:', error));
+    .then((response) => response.json())
+    .catch((error) => console.error('Error creating new listing:', error));
 }
 
 // Function to handle form submission for creating a new listing
@@ -42,6 +42,30 @@ function handleCreateListingFormSubmit(event) {
       document.getElementById('description').value = '';
       document.getElementById('price').value = '';
       document.getElementById('imageUrl').value = '';
+
+      // Add the newly created listing to the "Available Listings" section
+      const listingHtml = `
+        <div class="col-md-4 product-item">
+          <div class="card">
+            <img class="card-img-top" src="${imageUrl}" alt="Product">
+            <div class="card-body">
+              <h5 class="card-title">${title}</h5>
+              <p class="card-text">${description}</p>
+              <p class="price">$${price.toFixed(2)}</p>
+              <button class="btn btn-primary btn-sm favorite-btn" data-product-id="${response.id}">Favorite</button>
+              <form class="message-form">
+                <div class="form-group">
+                  <label for="message">Send Message:</label>
+                  <textarea class="form-control" id="message" name="message" rows="3" placeholder="Type your message here..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Send</button>
+              </form>
+              <!-- Add buttons for more details, buy, etc. -->
+            </div>
+          </div>
+        </div>
+      `;
+      document.getElementById('productListings').insertAdjacentHTML('beforeend', listingHtml);
     })
     .catch((error) => {
       // Handle error (e.g., show error message)

@@ -16,8 +16,9 @@
 </head>
 <body>
   <!-- Header -->
+  <% const isLoginPage = false; %> <!-- Define the isLoginPage variable -->
+  <% const isRegisterPage = false; %> <!-- Define the isRegisterPage variable -->
   <%- include('partials/_header') %>
-
   <!-- Slider -->
   <section class="slider-section">
     <div class="container">
@@ -117,6 +118,8 @@
   <script type="text/javascript" src="/scripts/users-api.js"></script>
   <script type="text/javascript" src="/scripts/users.js"></script>
   <script type="text/javascript" src="/scripts/widgets-api.js"></script>
+  <script type="text/javascript" src="/scripts/productListings.js"></script>
+  <script type="text/javascript" src="/scripts/createListing.js"></script>
 
 
   <!-- Logout script -->

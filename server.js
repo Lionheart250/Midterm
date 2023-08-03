@@ -111,6 +111,20 @@ app.post("/logout", (req, res) => {
   });
 });
 
+// In your server.js or an appropriate route file
+app.get("/dashboard", (req, res) => {
+  // Check if the user is logged in. Redirect to login if not authenticated.
+  if (!req.session || !req.session.user) {
+    return res.redirect("/login");
+  }
+
+  // If the user is logged in, render the dashboard page and pass the currentUser data.
+  const templateVars = {
+    currentUser: req.session.user,
+  };
+  res.render("dashboard", templateVars);
+});
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
