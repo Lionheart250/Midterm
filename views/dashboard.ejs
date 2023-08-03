@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard</title>
+
   <!-- Add necessary CSS links here -->
 </head>
 <body>
@@ -15,6 +16,33 @@
   <div class="dashboard-content">
     <h1>Welcome to Your Dashboard, <%= currentUser.username %>!</h1>
     <!-- Add other content specific to the dashboard -->
+
+    <!-- Listing Section -->
+    <section class="listing-section">
+      <h2>Your Listings</h2>
+      <div class="listings-container">
+        <% listings.forEach((listing) => { %>
+          <div class="listing">
+            <h3><%= listing.title %></h3>
+            <p><%= listing.description %></p>
+            <% if (typeof listing.price !== 'undefined') { %>
+              <p>Price: $<%= listing.price.toFixed(2) %></p>
+            <% } else { %>
+              <p>Price: N/A</p>
+            <% } %>
+            <img src="<%= listing.imageUrl %>" alt="Listing Image" style="max-width: 200px;">
+            <!-- Add a delete button for each listing -->
+            <form action="/dashboard/sold/<%= listing.id %>" method="POST">
+              <input type="hidden" name="isSold" value="<%= listing.is_sold ? 'false' : 'true' %>">
+              <button type="submit"><%= listing.is_sold ? 'Mark Available' : 'Mark Sold' %></button>
+            </form>
+            <button class="delete-btn" data-item-id="<%= listing.id %>">Delete</button>
+          </div>
+        <% }); %>
+      </div>
+    </section>
+
+    <!-- Create Listing Section -->
     <section class="create-listing-section">
       <h2>Create a New Listing</h2>
       <form id="createListingForm" class="create-listing-form">
@@ -39,6 +67,7 @@
     </section>
   </div>
   <script type="text/javascript" src="/scripts/createListing.js"></script>
+  <script type="text/javascript" src="/scripts/sold.js"></script>
 
   <!-- Add any necessary scripts -->
   <!-- Add necessary script links here -->

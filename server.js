@@ -55,6 +55,7 @@ const newListings = require('./routes/newListings');
 const registerRoute = require('./routes/register');
 const removeFavorite = require('./routes/removeFromFavorites');
 const searchRoute = require('./routes/search');
+const dashboardRoutes = require('./routes/dashboard'); // Import the dashboard.js route
 
 const attachDbPool = (req, res, next) => {
   req.dbPool = dbPool;
@@ -78,6 +79,10 @@ app.use('/newListings', attachDbPool, newListings);
 app.use('/register', attachDbPool, registerRoute);
 app.use('/removeFromFavorites', attachDbPool, removeFavorite);
 app.use('/search', attachDbPool, searchRoute);
+app.use('/dashboard', dashboardRoutes);
+
+// Import the deleteListing function from newListings.js
+const { deleteListing } = require('./routes/delete');
 
 app.get("/", (req, res) => {
   const templateVars = {
@@ -123,6 +128,60 @@ app.get("/dashboard", (req, res) => {
     currentUser: req.session.user,
   };
   res.render("dashboard", templateVars);
+});
+
+//delete listings
+// DELETE route to handle item deletion
+app.delete('/api/delete/:listingId', async (req, res) => {
+  try {
+    const listingId = req.params.listingId;
+    // Call the deleteListing function to delete the listing with the specified ID from the database
+    await deleteListing(listingId);
+    // Respond with a success message
+    res.json({ message: 'Listing deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting listing:', error);
+    res.status(500).json({ error: 'Error deleting listing' });
+  }
+});
+
+// UPDATE route to handle marking items as sold
+app.patch('/dashboard/sold/:listingId', async (req, res) => {
+  try {
+    const listingId = req.params.listingId;
+    const isSold = req.body.isSold;
+
+    // Assuming you have a "listings" table in your database, update the "is_sold" field for the specified listing
+    await dbPool.query('UPDATE listings SET is_sold = $1 WHERE id = $2', [isSold, listingId]);
+
+    // Respond with a success message
+    res.json({ message: 'Item marked as sold successfully' });
+  } catch (error) {
+    console.error('Error marking item as sold:', error);
+    res.status(500).json({ error: 'Error marking item as sold' });
+  }
+});
+
+//Update the "is_sold" status of an item
+app.post('/dashboard/sold/:listingId', async (req, res) => {
+  try {
+    const listingId = req.params.listingId;
+    const isSold = req.body.isSold === 'true';
+
+    // Update the "is_sold" status of the item in the database
+    const result = await dbPool.query('UPDATE items SET is_sold = $1 WHERE id = $2', [isSold, listingId]);
+
+    if (result.rowCount === 0) {
+      // No rows were updated, indicating the listing with the specified ID was not found
+      return res.status(404).json({ error: 'Listing not found' });
+    }
+
+    // Respond with a success message
+    res.json({ message: 'Listing status updated successfully' });
+  } catch (error) {
+    console.error('Error updating listing status:', error);
+    res.status(500).json({ error: 'Error updating listing status' });
+  }
 });
 
 app.listen(PORT, () => {
