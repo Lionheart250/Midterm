@@ -16,7 +16,7 @@ dbPool.connect();
 
 // Middleware function to check if the user is logged in
 const requireAuth = (req, res, next) => {
-  if (!req.session || !req.session.user) {
+  if (!req.session || !req.session.user_id) {
     return res.status(401).json({ error: 'You must be logged in to perform this action.' });
   }
   // User is authenticated, proceed to the next middleware or route handler
@@ -34,17 +34,21 @@ async function createListing(title, description, price, imageUrl, userId) {
 // The route handler for creating new listings
 router.post('/', requireAuth, async (req, res) => {
   try {
+    const dbPool = req.dbPool;
+
+    // Get the user's ID from the session (assuming you have implemented authentication)
+    const userId = req.session.user_id;
+
+    // Get listing data from the request body (assuming you receive it in the POST request)
     const { title, description, price, imageUrl } = req.body;
-    const userId = req.session.user.id;
+  
 
     // Call the createListing function to insert the new listing into the database
     const newListing = await createListing(title, description, price, imageUrl, userId);
 
-    // Return the newly created listing as the response
-    res.status(201).json(newListing);
   } catch (error) {
     console.error('Error creating new listing:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
