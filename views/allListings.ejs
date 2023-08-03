@@ -1,0 +1,33 @@
+<!-- allListings.ejs -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>All Listings</title>
+  <!-- Your CSS and other head elements here -->
+</head>
+<body>
+  <!-- Header -->
+  <% include('partials/_header') %>
+
+  <!-- Listing Section -->
+  <section class="all-listings-section">
+    <h1>All Listings</h1>
+    <% if (listings && listings.length > 0) { %>
+      <ul>
+        <% listings.forEach((listing) => { %>
+          <li>
+            <h2><%= listing.title %></h2>
+            <p><%= listing.description %></p>
+            <!-- Display other listing information as needed -->
+          </li>
+        <% }); %>
+      </ul>
+    <% } else { %>
+      <p>No listings available</p>
+    <% } %>
+  </section>
+
+  <!-- Your footer and other scripts here -->
+</body>
+</html>
