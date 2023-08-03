@@ -117,17 +117,22 @@ app.post("/logout", (req, res) => {
 });
 
 // In your server.js or an appropriate route file
-app.get("/dashboard", (req, res) => {
-  // Check if the user is logged in. Redirect to login if not authenticated.
-  if (!req.session || !req.session.user) {
-    return res.redirect("/login");
-  }
+const getAllListings = require('./routes/myListings');
 
-  // If the user is logged in, render the dashboard page and pass the currentUser data.
-  const templateVars = {
-    currentUser: req.session.user,
-  };
-  res.render("dashboard", templateVars);
+app.get("/allListings", async (req, res) => {
+  try {
+    // Fetch all listings from the database
+    const allListings = await getAllListings();
+
+    const templateVars = {
+      currentUser: req.session.user, // Assuming you are using the "user" session variable for authentication
+      listings: allListings // Pass the fetched listings data to the template
+    };
+    res.render("allListings", templateVars);
+  } catch (error) {
+    console.error("Error fetching listings:", error);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 //delete listings
