@@ -1,22 +1,32 @@
 // Function to mark an item as sold
-function markItemAsSold(productId) {
-  fetch(`/api/markSold/${productId}`, { method: 'PUT' }) // Replace with the actual API endpoint for marking items as sold
-    .then((response) => {
-      if (response.ok) {
-        // Item marked as sold successfully
-        // You can add additional logic here, such as updating UI elements
-        console.log(`Product with ID ${productId} marked as sold.`);
-      } else {
-        console.error('Error marking item as sold:', response.statusText);
-      }
-    })
-    .catch((error) => console.error('Error marking item as sold:', error));
+async function markItemAsSold(itemId, isSold) {
+  try {
+    const response = await fetch(`/dashboard/sold/${itemId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ isSold }),
+    });
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(errorMessage);
+    }
+
+    // Reload the page to reflect the updated status
+    location.reload();
+  } catch (error) {
+    console.error('Error marking item as sold:', error);
+    alert('Error marking item as sold. Please try again later.');
+  }
 }
 
-// Event listener for "Mark as Sold" button clicks
+// Event listener for "Mark Sold" button clicks
 document.addEventListener('click', (event) => {
   if (event.target.classList.contains('mark-sold-btn')) {
-    const productId = event.target.dataset.productId;
-    markItemAsSold(productId);
+    const itemId = event.target.dataset.itemId;
+    const isSold = event.target.checked;
+    markItemAsSold(itemId, isSold);
   }
 });

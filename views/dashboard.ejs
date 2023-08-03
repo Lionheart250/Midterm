@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard</title>
+
   <!-- Add necessary CSS links here -->
 </head>
 <body>
@@ -31,6 +32,10 @@
             <% } %>
             <img src="<%= listing.imageUrl %>" alt="Listing Image" style="max-width: 200px;">
             <!-- Add a delete button for each listing -->
+            <form action="/dashboard/sold/<%= listing.id %>" method="POST">
+              <input type="hidden" name="isSold" value="<%= listing.is_sold ? 'false' : 'true' %>">
+              <button type="submit"><%= listing.is_sold ? 'Mark Available' : 'Mark Sold' %></button>
+            </form>
             <button class="delete-btn" data-item-id="<%= listing.id %>">Delete</button>
           </div>
         <% }); %>
@@ -62,6 +67,7 @@
     </section>
   </div>
   <script type="text/javascript" src="/scripts/createListing.js"></script>
+  <script type="text/javascript" src="/scripts/sold.js"></script>
 
   <!-- Add any necessary scripts -->
   <!-- Add necessary script links here -->
