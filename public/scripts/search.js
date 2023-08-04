@@ -69,6 +69,13 @@ function fetchFeaturedItems() {
       price: 79.99,
       imageUrl: 'images/jeans.jpg',
     },
+    {
+      id: 2,
+      title: 'Featured Product 3',
+      description: 'Another featured product for you to explore.',
+      price: 299.99,
+      imageUrl: 'images/jacket.jpg',
+    },
     // Add more featured items as needed
   ];
 

@@ -1,0 +1,23 @@
+.featured-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.slider-section{
+  margin-left: 10em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .row{
+    display: flex;
+    align-items:flex-start;
+    justify-content: space-around;
+  }
+
+  .card {
+
+  }
+}

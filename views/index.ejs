@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/main.css" type="text/css" />
   <link rel="stylesheet" href="/styles/listings.css" type="text/css" />
   <link rel="stylesheet" href="/styles/header.css" type="text/css" />
   <link rel="stylesheet" href="/styles/sidebar.css" type="text/css" />
@@ -21,7 +21,7 @@
   <%- include('partials/_header') %>
   <!-- Slider -->
   <section class="slider-section">
-    <div class="container">
+    <div class="featured-container">
       <!-- Add a carousel/slider here to showcase featured products -->
       <h2>Featured Products</h2>
       <div class="carousel">
@@ -61,26 +61,24 @@
       <h2>Available Listings</h2>
       <div class="row">
         <!-- Add product listings here -->
-        <div class="col-md-4 product-item">
-          <div class="card">
-            <img class="card-img-top" src="path/to/product-image.jpg" alt="Product">
-            <div class="card-body">
-              <h5 class="card-title">Product Title</h5>
-              <p class="card-text">Product description goes here.</p>
-              <p class="price">$XX.XX</p>
-              <button class="favorite-button" data-product-id="1" onclick="toggleHeartIcon()">
-                <i id="heartIcon" class="fa-regular fa-heart" style="color: #ff0000;"></i>
-                Favorite
-              </button>
-              <form class="message-form">
-                <div class="form-group">
-                  <label for="message">Send Message:</label>
-                  <textarea class="form-control" id="message" name="message" rows="3" placeholder="Type your message here..."></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">Send</button>
-              </form>
-              <!-- Add buttons for more details, buy, etc. -->
-            </div>
+        <div class="card">
+          <img class="card-img-top" src="path/to/product-image.jpg" alt="Product">
+          <div class="card-body">
+            <h5 class="card-title">Product Title</h5>
+            <p class="card-text">Product description goes here.</p>
+            <p class="price">$XX.XX</p>
+            <button class="favorite-button" data-product-id="1" onclick="toggleHeartIcon()">
+              <i id="heartIcon" class="fa-regular fa-heart" style="color: #ff0000;"></i>
+              Favorite
+            </button>
+            <form class="message-form">
+              <div class="form-group">
+                <label for="message">Send Message:</label>
+                <textarea class="form-control" id="message" name="message" rows="3" placeholder="Type your message here..."></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Send</button>
+            </form>
+            <!-- Add buttons for more details, buy, etc. -->
           </div>
         </div>
       </div>
