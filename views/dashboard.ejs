@@ -35,6 +35,14 @@
             <% } else { %>
               <p>Price: N/A</p>
             <% } %>
+            <!-- Add mark and delete button for each listing -->
+            <div class="button-container">
+              <form action="/dashboard/sold/<%= listing.id %>" method="POST">
+                <input type="hidden" name="isSold" value="<%= listing.is_sold ? 'false' : 'true' %>">
+                <button type="submit" class="sold-btn"><%= listing.is_sold ? 'Mark Available' : 'Mark Sold' %></button>
+              </form>
+              <button class="delete-btn" data-item-id="<%= listing.id %>">Delete</button>
+            </div>
           </div>
         <% }); %>
       </div>
