@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { dbPool } = require('../lib/db')
+const dbPool = require('../db/connection');
 
 // Middleware function to check if the user is logged in
 const requireAuth = (req, res, next) => {
