@@ -1,0 +1,53 @@
+.dashboard-content {
+  margin: 0 20px;
+}
+
+.listing-section{
+  margin-top: 10px;
+}
+
+.listings-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+}
+
+.listing {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.sold-btn{
+  border-radius: 4px;
+  border-width: 2px;
+  color: rgb(222, 0, 0);
+  font-weight: 600;
+  background-color: white;
+  border-color: black;
+  border-style: solid;
+}
+
+.delete-btn{
+  margin-top: 10px;
+  color: white;
+  background-color: rgb(196, 0, 0);
+  border-radius: 4px;
+  border-width: 2px;
+  border-color: black;
+  border-style: solid;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+  opacity: 70%;
+}
+
+.create-listing-section{
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+#createListingForm{
+  margin-bottom: 15px;
+}

@@ -9,6 +9,7 @@
   <!-- Add necessary CSS links here -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
   <link rel="stylesheet" href="/styles/header.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/dashboard.css" type="text/css" />
 
 </head>
 <body>
@@ -27,17 +28,17 @@
         <% listings.forEach((listing) => { %>
           <div class="listing">
             <h3><%= listing.title %></h3>
+            <img src="<%= listing.imageUrl %>" alt="Listing Image" style="max-width: 200px;">
             <p><%= listing.description %></p>
             <% if (typeof listing.price !== 'undefined') { %>
               <p>Price: $<%= listing.price.toFixed(2) %></p>
             <% } else { %>
               <p>Price: N/A</p>
             <% } %>
-            <img src="<%= listing.imageUrl %>" alt="Listing Image" style="max-width: 200px;">
             <!-- Add a delete button for each listing -->
             <form action="/dashboard/sold/<%= listing.id %>" method="POST">
               <input type="hidden" name="isSold" value="<%= listing.is_sold ? 'false' : 'true' %>">
-              <button type="submit"><%= listing.is_sold ? 'Mark Available' : 'Mark Sold' %></button>
+              <button class="sold-btn" type="submit"><%= listing.is_sold ? 'Mark Available' : 'Mark Sold' %></button>
             </form>
             <button class="delete-btn" data-item-id="<%= listing.id %>">Delete</button>
           </div>
