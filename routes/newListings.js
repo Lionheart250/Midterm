@@ -28,7 +28,7 @@ router.post('/', requireAuth, async (req, res) => {
 
     // Get listing data from the request body (assuming you receive it in the POST request)
     const { title, description, price, imageUrl } = req.body;
-  
+
 
     // Call the createListing function to insert the new listing into the database
     const newListing = await createListing(title, description, price, imageUrl, userId);

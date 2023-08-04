@@ -36,3 +36,9 @@ router.get('/', requireAuth, async (req, res) => {
 });
 
 module.exports = router;
+
+async function getAllListings() {
+  const query = 'SELECT *, coalesce(price, 0) AS price FROM listings'; // Use coalesce to set default value 0 if price is null
+  const result = await dbPool.query(query);
+  return result.rows;
+}

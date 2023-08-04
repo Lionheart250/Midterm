@@ -1,4 +1,3 @@
-<!-- allListings.ejs -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,41 +5,42 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>All Listings</title>
+
   <!-- Add necessary CSS links here -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link rel="stylesheet" href="/styles/header.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/dashboard.css" type="text/css" />
+
 </head>
 <body>
   <!-- Header -->
-  <% include('partials/_header') %>
+  <%- include('partials/_header') %>
 
-  <!-- Listing Section -->
-  <section class="all-listings-section">
-    <div class="container">
-      <h2>All Listings</h2>
-      <div class="row">
-        <% listings.forEach((listing) => { %>
-          <div class="col-md-4 product-item">
-            <div class="card">
-              <img class="card-img-top" src="<%= listing.imageUrl %>" alt="Product">
-              <div class="card-body">
-                <h5 class="card-title"><%= listing.title %></h5>
-                <p class="card-text"><%= listing.description %></p>
-                <p class="price">$<%= listing.price.toFixed(2) %></p>
-                <!-- Add other listing details -->
-              </div>
-            </div>
-          </div>
-        <% }); %>
+  <!-- Main Content -->
+ <!-- Listing Section -->
+<section class="listing-section">
+  <h2>Your Listings</h2>
+  <div class="listings-container">
+    <% listings.forEach((listing) => { %>
+      <div class="listing">
+        <h3><%= listing.title %></h3>
+        <img src="<%= listing.imageUrl %>" alt="Listing Image" style="max-width: 200px;">
+        <p><%= listing.description %></p>
+        <% if (typeof listing.price !== 'undefined' && listing.price !== null) { %>
+          <p>Price: $<%= listing.price %></p>
+        <% } else { %>
+          <p>Price: N/A</p>
+        <% } %>
+        <!-- Add a delete button for each listing -->
+        <form action="/dashboard/sold/<%= listing.id %>" method="POST">
+          <input type="hidden" name="isSold" value="<%= listing.is_sold ? 'false' : 'true' %>">
+          <button class="btn btn-primary sold-btn" type="submit"><%= listing.is_sold ? 'Mark Available' : 'Mark Sold' %></button>
+        </form>
+        <button class="btn btn-danger delete-btn" data-item-id="<%= listing.id %>">Delete</button>
       </div>
-    </div>
-  </section>
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <p>&copy; 2023 Clothing Buy and Sell. All rights reserved.</p>
-    </div>
-  </footer>
+    <% }); %>
+  </div>
+  <script type="text/javascript" src="/scripts/createListing.js"></script>
+  <script type="text/javascript" src="/scripts/sold.js"></script>
 
-  <!-- Add any necessary scripts -->
-  <!-- Add necessary script links here -->
-</body>
-</html>
+</section>

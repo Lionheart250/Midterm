@@ -105,24 +105,7 @@ app.post("/logout", (req, res) => {
   });
 });
 
-// In your server.js or an appropriate route file
-const getAllListings = require('./routes/allListings');
-
-app.get("/allListings", async (req, res) => {
-  try {
-    // Fetch all listings from the database
-    const allListings = await getAllListings();
-
-    const templateVars = {
-      currentUser: req.session.user,
-      listings: allListings
-    };
-    res.render("allListings", templateVars);
-  } catch (error) {
-    console.error("Error fetching listings:", error);
-    res.status(500).send("Internal Server Error");
-  }
-});
+app.use('/allListings', require('./routes/allListings'));
 
 // DELETE route to handle item deletion
 app.delete('/api/delete/:listingId', async (req, res) => {
