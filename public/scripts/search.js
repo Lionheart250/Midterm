@@ -57,22 +57,32 @@ function fetchFeaturedItems() {
   const featuredItems = [
     {
       id: 1,
-      title: 'Featured Product 1',
-      description: 'This is a featured product with great features.',
+      title: 'Business Shirt',
+      description: 'A button-down shirt cut in a classic fit for elevated, professional wear. Styled with a point collar.',
       price: 49.99,
       imageUrl: 'images/shirt.jpg',
     },
     {
       id: 2,
-      title: 'Featured Product 2',
-      description: 'Another featured product for you to explore.',
+      title: 'Denim Jeans',
+      description: 'An iconic essential, our reimagined jeans are made with rigid cotton denim for a classic, sturdy feel that will break-in over time. Updated with a signature metal logo hardware. Cut in a slim fit with considered detailing and reinforced seams.',
       price: 79.99,
       imageUrl: 'images/jeans.jpg',
     },
     {
       id: 2,
-      title: 'Featured Product 3',
-      description: 'Another featured product for you to explore.',
+      title: 'Long Sleeve Coat',
+      description: `<ul>
+                      Enjoy some cold weather coziness with this lined coat for warmth and comfort
+                      <li>Notch collar</li>
+                      <li>Long sleeves</li>
+                      <li>Button closure at front</li>
+                      <li>Waist slip pockets</li>
+                      <li>Lined</li>
+                      <li>62% wool/26% polyester/6% cashmere/4% other fibres/2% rayon</li>
+                      <li>Dry clean</li>
+                      <li>Imported</li>
+                    </ul>`,
       price: 299.99,
       imageUrl: 'images/jacket.jpg',
     },

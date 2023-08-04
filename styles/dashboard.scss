@@ -19,8 +19,9 @@
 
 .button-container {
   display: flex;
-  align-items: center !important;
+  align-items: center;
   justify-content: space-evenly;
+  flex-direction: row;
 }
 
 .sold-btn{
@@ -34,7 +35,6 @@
 }
 
 .delete-btn{
-  margin-top: 10px;
   color: white;
   background-color: rgb(196, 0, 0);
   border-radius: 4px;
