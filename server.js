@@ -105,7 +105,18 @@ app.post("/logout", (req, res) => {
   });
 });
 
-app.use('/allListings', require('./routes/allListings'));
+// In your server.js or an appropriate route file
+// ... (other imports and configurations)
+
+const allListingsRoutes = require('./routes/allListings');
+
+// ... (other app.use statements)
+
+app.use('/dashboard', dashboardRoutes);
+app.use('/allListings', allListingsRoutes);
+
+// ... (other routes and app.listen)
+
 
 // DELETE route to handle item deletion
 app.delete('/api/delete/:listingId', async (req, res) => {

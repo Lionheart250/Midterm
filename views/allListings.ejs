@@ -17,30 +17,32 @@
   <%- include('partials/_header') %>
 
   <!-- Main Content -->
- <!-- Listing Section -->
-<section class="listing-section">
-  <h2>Your Listings</h2>
-  <div class="listings-container">
-    <% listings.forEach((listing) => { %>
-      <div class="listing">
-        <h3><%= listing.title %></h3>
-        <img src="<%= listing.imageUrl %>" alt="Listing Image" style="max-width: 200px;">
-        <p><%= listing.description %></p>
-        <% if (typeof listing.price !== 'undefined' && listing.price !== null) { %>
-          <p>Price: $<%= listing.price %></p>
-        <% } else { %>
-          <p>Price: N/A</p>
-        <% } %>
-        <!-- Add a delete button for each listing -->
-        <form action="/dashboard/sold/<%= listing.id %>" method="POST">
-          <input type="hidden" name="isSold" value="<%= listing.is_sold ? 'false' : 'true' %>">
-          <button class="btn btn-primary sold-btn" type="submit"><%= listing.is_sold ? 'Mark Available' : 'Mark Sold' %></button>
-        </form>
-        <button class="btn btn-danger delete-btn" data-item-id="<%= listing.id %>">Delete</button>
-      </div>
-    <% }); %>
+  <div class="container">
+    <h1>Welcome to Your Listings, <%= currentUser.username %>!</h1>
+    <div class="row">
+      <% listings.forEach((listing) => { %>
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <img src="<%= listing.imageUrl %>" class="card-img-top" alt="Listing Image">
+            <div class="card-body">
+              <h5 class="card-title"><%= listing.title %></h5>
+              <p class="card-text"><%= listing.description %></p>
+              <% if (typeof listing.price !== 'undefined' && listing.price !== null) { %>
+                <p class="card-text">Price: $<%= listing.price %></p>
+              <% } else { %>
+                <p class="card-text">Price: N/A</p>
+              <% } %>
+              <!-- Add a delete button for each listing -->
+              <form action="/dashboard/sold/<%= listing.id %>" method="POST">
+                <input type="hidden" name="isSold" value="<%= listing.is_sold ? 'false' : 'true' %>">
+                <button class="btn btn-primary sold-btn" type="submit"><%= listing.is_sold ? 'Mark Available' : 'Mark Sold' %></button>
+              </form>
+              <button class="btn btn-danger delete-btn" data-item-id="<%= listing.id %>">Delete</button>
+            </div>
+          </div>
+        </div>
+      <% }); %>
+    </div>
   </div>
-  <script type="text/javascript" src="/scripts/createListing.js"></script>
-  <script type="text/javascript" src="/scripts/sold.js"></script>
-
-</section>
+</body>
+</html>
