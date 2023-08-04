@@ -1,18 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Pool } = require('pg');
-
-const dbParams = {
-  user: 'labber',
-  password: 'labber',
-  host: 'localhost',
-  port: 5432,
-  database: 'midterm',
-  ssl: process.env.DB_SSL === 'true',
-};
-
-const dbPool = new Pool(dbParams);
-dbPool.connect();
+const dbPool = require('../db/connection');
 
 // Middleware function to check if the user is logged in
 const requireAuth = (req, res, next) => {
@@ -34,7 +22,6 @@ async function createListing(title, description, price, imageUrl, userId) {
 // The route handler for creating new listings
 router.post('/', requireAuth, async (req, res) => {
   try {
-    const dbPool = req.dbPool;
 
     // Get the user's ID from the session (assuming you have implemented authentication)
     const userId = req.session.user_id;

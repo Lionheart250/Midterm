@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const { markListingAsSold } = require('../lib/db');
+const dbPool = require('../db/connection');
 
 // Route handler for /markSold
 router.post('/', async (req, res) => {
   try {
     const listingId = req.body.listingId; // Assuming you receive the listing ID in the request body
-    const dbPool = req.dbPool;
 
     // Mark the listing as sold in the database
     await markListingAsSold(listingId, dbPool);

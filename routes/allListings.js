@@ -1,18 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Pool } = require('pg');
-
-const dbParams = {
-  user: 'labber',
-  password: 'labber',
-  host: 'localhost',
-  port: 5432,
-  database: 'midterm',
-  ssl: process.env.DB_SSL === 'true',
-};
-
-const dbPool = new Pool(dbParams);
-dbPool.connect();
+const dbPool = require('../db/connection');
 
 // Function to fetch all listings from the database
 async function getAllListings() {

@@ -54,31 +54,23 @@ const myListings = require('./routes/myListings');
 const newListings = require('./routes/newListings');
 const registerRoute = require('./routes/register');
 const removeFavorite = require('./routes/removeFromFavorites');
-const searchRoute = require('./routes/search');
 const dashboardRoutes = require('./routes/dashboard'); // Import the dashboard.js route
 
-const attachDbPool = (req, res, next) => {
-  req.dbPool = dbPool;
-  next();
-};
-
-app.use(attachDbPool);
 app.use('/api/users', userApiRoutes);
 app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
-app.use('/addToFavorites', attachDbPool, addToFavorites);
-app.use('/clothing', attachDbPool, clothingRoutes);
-app.use('/contactSeller', attachDbPool, contactSeller);
-app.use('/delete', attachDbPool, deleteItem);
-app.use('/login', attachDbPool, loginRoute);
-app.use('/logout', attachDbPool, logoutRoute);
-app.use('/sold', attachDbPool, sold);
-app.use('/myFavorites', attachDbPool, myFavorites);
-app.use('/myListings', attachDbPool, myListings);
-app.use('/newListings', attachDbPool, newListings);
-app.use('/register', attachDbPool, registerRoute);
-app.use('/removeFromFavorites', attachDbPool, removeFavorite);
-app.use('/search', attachDbPool, searchRoute);
+app.use('/addToFavorites', addToFavorites);
+app.use('/clothing', clothingRoutes);
+app.use('/contactSeller', contactSeller);
+app.use('/delete', deleteItem);
+app.use('/login', loginRoute);
+app.use('/logout', logoutRoute);
+app.use('/sold', sold);
+app.use('/myFavorites', myFavorites);
+app.use('/myListings', myListings);
+app.use('/newListings', newListings);
+app.use('/register', registerRoute);
+app.use('/removeFromFavorites', removeFavorite);
 app.use('/dashboard', dashboardRoutes);
 
 // Import the deleteListing function from newListings.js

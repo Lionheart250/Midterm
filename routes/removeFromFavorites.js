@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const dbPool = require('../db/connection');
 
 // Route handler for removing an item from favorites
 router.post('/', async (req, res) => {
   try {
     // Access the dbPool from req object
-    const dbPool = req.dbPool;
 
     // Get the user's ID from the session (assuming you have implemented authentication)
     const userId = req.session.user_id;
