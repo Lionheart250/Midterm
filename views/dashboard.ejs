@@ -27,24 +27,19 @@
       <div class="listings-container">
         <% listings.forEach((listing) => { %>
           <div class="listing">
-            <h3><%= listing.title %></h3>
-            <img src="<%= listing.imageUrl %>" alt="Listing Image" style="max-width: 200px;">
+            <h3><%= listing.name %></h3>
+            <img src="<%= listing.image %>" alt="Listing Image" style="max-width: 200px;">
             <p><%= listing.description %></p>
-            <% if (typeof listing.price !== 'undefined') { %>
-              <p>Price: $<%= listing.price.toFixed(2) %></p>
+            <% if (typeof listing.price !== 'undefined' && listing.price !== null && !isNaN(Number(listing.price))) { %>
+              <p>Price: $<%= Number(listing.price).toFixed(2) %></p>
             <% } else { %>
               <p>Price: N/A</p>
             <% } %>
-            <!-- Add a delete button for each listing -->
-            <form action="/dashboard/sold/<%= listing.id %>" method="POST">
-              <input type="hidden" name="isSold" value="<%= listing.is_sold ? 'false' : 'true' %>">
-              <button class="sold-btn" type="submit"><%= listing.is_sold ? 'Mark Available' : 'Mark Sold' %></button>
-            </form>
-            <button class="delete-btn" data-item-id="<%= listing.id %>">Delete</button>
           </div>
         <% }); %>
       </div>
     </section>
+
 
     <!-- Create Listing Section -->
     <section class="create-listing-section">
