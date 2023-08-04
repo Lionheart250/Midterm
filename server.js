@@ -78,12 +78,9 @@ const { deleteListing } = require('./routes/delete');
 
 app.get("/", (req, res) => {
   const templateVars = {
-    currentUser: req.session.user, // Update this line
-    userEmail: undefined,
-    error: undefined // Add the 'error' key with value 'undefined'
-  }
-  if (req.session && req.session.user) {
-    templateVars.userEmail = req.session.user.email; // Update this line
+    currentUser: req.session.user,
+    userEmail: req.session.user ? req.session.user.email : undefined,
+    error: undefined
   }
   res.render("index", templateVars);
 });
@@ -91,7 +88,7 @@ app.get("/", (req, res) => {
 // Add this new route to handle the GET request to /login
 app.get("/login", (req, res) => {
   const templateVars = {
-    error: undefined // Pass the error as undefined to the login page
+    error: undefined
   }
   res.render("login", templateVars);
 });
@@ -109,7 +106,7 @@ app.post("/logout", (req, res) => {
 });
 
 // In your server.js or an appropriate route file
-const getAllListings = require('./routes/myListings');
+const getAllListings = require('./routes/allListings');
 
 app.get("/allListings", async (req, res) => {
   try {
@@ -117,8 +114,8 @@ app.get("/allListings", async (req, res) => {
     const allListings = await getAllListings();
 
     const templateVars = {
-      currentUser: req.session.user, // Assuming you are using the "user" session variable for authentication
-      listings: allListings // Pass the fetched listings data to the template
+      currentUser: req.session.user,
+      listings: allListings
     };
     res.render("allListings", templateVars);
   } catch (error) {
@@ -127,7 +124,6 @@ app.get("/allListings", async (req, res) => {
   }
 });
 
-//delete listings
 // DELETE route to handle item deletion
 app.delete('/api/delete/:listingId', async (req, res) => {
   try {
@@ -159,7 +155,7 @@ app.patch('/dashboard/sold/:listingId', async (req, res) => {
   }
 });
 
-//Update the "is_sold" status of an item
+// Update the "is_sold" status of an item
 app.post('/dashboard/sold/:listingId', async (req, res) => {
   try {
     const listingId = req.params.listingId;

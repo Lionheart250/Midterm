@@ -10,7 +10,7 @@ async function getAllListings() {
 }
 
 // Route handler for /allListings
-router.get('/allListings', async (req, res) => {
+router.get('/', requireAuth, async (req, res) => {
   try {
     // Fetch all listings from the database
     const allListings = await getAllListings();
@@ -22,7 +22,7 @@ router.get('/allListings', async (req, res) => {
     res.render('allListings', templateVars); // Render the "allListings.ejs" template with the data
   } catch (error) {
     console.error('Error fetching listings:', error);
-    res.status(500).send('Internal Server Error');
+    res.status(500).render('error', { error: 'Internal Server Error' });
   }
 });
 
