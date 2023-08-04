@@ -2,6 +2,15 @@ const express = require('express');
 const router = express.Router();
 const dbPool = require('../db/connection');
 
+// Middleware function to check if the user is logged in
+const requireAuth = (req, res, next) => {
+  if (!req.session || !req.session.user) {
+    return res.status(401).json({ error: 'You must be logged in to perform this action.' });
+  }
+  // User is authenticated, proceed to the next middleware or route handler
+  next();
+};
+
 // Function to fetch all listings from the database
 async function getAllListings() {
   const query = 'SELECT * FROM listings';
